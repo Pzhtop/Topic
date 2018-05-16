@@ -81,6 +81,7 @@
       <?php else:?>
         <li><a href="?page=1&keyword=<?=$keyword;?>&tag=<?=$tagId;?>">&laquo;</a></li>
       <?php endif;?>
+      <?php $showPages=isset($showPages)?$showPages:[]; ?>
       <?php foreach($showPages as $showPage):?>
       <?php if($page == $showPage):?>
         <li class="active"><span><?=$page;?></span></li>
@@ -88,6 +89,7 @@
         <li><a href="?page=<?=$showPage;?>&keyword=<?=$keyword;?>&tag=<?=$tagId;?>"><?=$showPage;?></a></li>
       <?php endif;?>
       <?php endforeach;?>
+      <?php $pageNum=isset($pageNum)?$pageNum:0; ?>
       <?php if($page < $pageNum):?>
         <li><a href="?page=<?=$pageNum;?>&keyword=<?=$keyword;?>&tag=<?=$tagId;?>" rel="next">&raquo;</a></li>
       <?php else:?>

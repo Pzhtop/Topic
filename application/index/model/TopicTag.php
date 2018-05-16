@@ -13,4 +13,13 @@ class TopicTag extends Model{
     public function tag(){
         return $this->belongsTo('Tag','tag_id');
     }
+
+    public static function getHotTags($num){
+        $topicTag=new self();
+
+        return $topicTag->field(['tag_id','count(topic_id) as topicNum'])
+        ->group('tag_id')
+        ->limit($num)
+        ->select();
+    }
 }

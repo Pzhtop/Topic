@@ -252,8 +252,9 @@ return [
         'Technology'=>[
             5=>'程序猿',
             6=>'分享与创造',
-        ]
+        ],
+    ],
 
-
-    ]
+    'limitNum'=>2,
+    'hotTagsNum'=>3,
 ];
