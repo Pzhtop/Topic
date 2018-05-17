@@ -115,10 +115,24 @@ class Topic extends Controller{
           $topics=TopicModel::getTopics();
           cache($cacheName,$topics,1000);
         }
-                
+        $topics = TopicModel::getTopics();    
+       
+        //限制列表展示数
+        $page= $pageInfo['page'];
+        $limitNum= config('limitNum');
+        $limitTopics=[];
+        for($i= $limitNum * ($page -1);$i<= $page* $limitNum-1;$i++){
+            
+            if(!isset($topics[$i])){
+                continue;
+            }
+            
+            $limitTopics[]= $topics[$i];
+        }
+
         $this->assign([
             'user'=>session('user'),
-            'topics'=>$topics,
+            'topics'=> $limitTopics,
             'page'=>$pageInfo['page'],
             'showPages'=>$pageInfo['showPages'],
             'pageNum'=>$pageInfo['pageNum'],

@@ -255,6 +255,6 @@ return [
         ],
     ],
 
-    'limitNum'=>2,
+    'limitNum'=>3,
     'hotTagsNum'=>3,
 ];
