@@ -7,7 +7,7 @@ use think\Model;
 class Topic extends Model
 {
     public static function getTopic($id){
-        return self::withCount(['praises'])->find(['id'=>$id]);
+        return self::withCount(['praises','replies'])->find(['id'=>$id]);
     }
 
     public function user(){
@@ -18,9 +18,13 @@ class Topic extends Model
         return $this->hasMany('Praise','topic_id');
     }
 
+    public function replies(){
+        return $this->hasMany('Reply','topic_id');
+    }
+
     
     public static function getTopics(){
-        return self::withCount(['praises'])->select();
+        return self::withCount(['praises', 'replies'])->select();
     }   
 
     public static function getPageInfo($page,$limitNum){

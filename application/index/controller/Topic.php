@@ -6,6 +6,7 @@ use app\index\model\Tag;
 use app\index\model\Topic as TopicModel;
 use app\index\model\TopicTag;
 use app\index\model\Praise;
+use app\index\model\Reply as ReplyModel;
 
 
 class Topic extends Controller{
@@ -73,7 +74,7 @@ class Topic extends Controller{
             $this->assign([
                 'user'=>$user,
                 'topic'=>$topic,
-                
+                'replies'=> ReplyModel::where(['topic_id'=>$topicId])->select(), 
                 'topicTags' => TopicTag::getTopicTagsByTopicId($topic->id),
                 
                 'categoryNames' => getCategoryNames($topic->category_id),
@@ -136,7 +137,8 @@ class Topic extends Controller{
             'page'=>$pageInfo['page'],
             'showPages'=>$pageInfo['showPages'],
             'pageNum'=>$pageInfo['pageNum'],
-            'hotTags'=>TopicTag::getHotTags(config('hotTagsNum'))
+            'hotTags'=>TopicTag::getHotTags(config('hotTagsNum')),
+            
         ]);
                     
         echo $this->fetch('index');
